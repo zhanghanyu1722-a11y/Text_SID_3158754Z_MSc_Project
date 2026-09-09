@@ -1,0 +1,19 @@
+# Large binary artifacts — kept OUT of git.
+# The full intermediate tensors (frozen embeddings + Semantic-ID pickles, ~980 MB)
+# are shipped separately (local zip / GitHub Release assets). See README.
+artifacts/
+*.pt
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Runtime / logs produced inside the GRID checkout (never committed)
+logs/
+.pipeline_state/
+
+# OS
+.DS_Store
+Thumbs.db

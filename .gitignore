@@ -1,7 +1,7 @@
-# Large binary artifacts — kept OUT of git.
-# The full intermediate tensors (frozen embeddings + Semantic-ID pickles, ~980 MB)
-# are shipped separately (local zip / GitHub Release assets). See README.
-artifacts/
+# Large binary tensors (frozen embeddings & Semantic-ID pickles; ~980 MB total,
+# individual files up to ~600 MB) are intentionally NOT tracked here:
+# they exceed the Moodle 230 MB limit and GitHub's 100 MB-per-file limit.
+# The full set is distributed as a GitHub Release archive — see artifacts/README.md.
 *.pt
 *.zip
 

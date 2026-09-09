@@ -18,7 +18,7 @@ configuration and log files of the reported runs:
 | `scripts/*.py` | preprocessing / embedding-extraction / fusion scripts written by the author (cleaned and parameterised for this package) |
 | `pipeline/*.sh` | end-to-end reproduction scripts written for this package |
 | `results/` | byte-exact copies of the logged CSVs that produced the dissertation tables |
-| `artifacts/` | frozen item embeddings and Semantic-ID pickles of the reported runs (the author's own computed representations; no raw dataset files) |
+| `artifacts/` | **guide** to the intermediate tensors of the reported runs: this archive/repository ships `README.md` + `MANIFEST.csv`; the full ~980 MB `.pt` set (the author's own computed representations; no raw dataset files) is distributed as a GitHub Release archive (see `artifacts/README.md`) |
 | `docs/`, `README.md` | documentation |
 
 Everything else (the GRID training/inference codebase, the datasets, the
@@ -59,11 +59,11 @@ see the README for exact acquisition steps.
   secondary redistribution of the dataset.  This package therefore does **not**
   ship any raw MicroLens files (interactions, titles, covers); reproduce them
   by downloading the official files (see README, "Data acquisition").  The
-  `artifacts/` folder contains only the author's *own computed* intermediate
-  tensors (frozen embeddings and Semantic-ID pickles derived from the
-  downloaded data for the reported runs), included for inspection and for
-  re-running the downstream stages; treat them with the same care as the rest
-  of the dissertation material.
+  derived intermediate tensors under `artifacts/` (frozen embeddings and
+  Semantic-ID pickles computed by the author from the downloaded data for the
+  reported runs) are distributed as a GitHub Release archive rather than being
+  bundled here, because of the Moodle 230 MB / GitHub 100 MB-per-file limits;
+  treat them with the same care as the rest of the dissertation material.
 - **Models and the GRID codebase** are subject to their respective licenses;
   model checkpoints and pretrained weights keep their original licenses when
   downloaded.

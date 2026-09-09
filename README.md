@@ -29,7 +29,7 @@ pipeline on Amazon Beauty (`pipeline/01_validate_amazon_beauty.sh`).
 ## 1. Repository layout
 
 ```
-TextImage_SID_reproduction/
+Text_SID_3158754Z_MSc_Project/
 ├── README.md                    this file (start here)
 ├── ACKNOWLEDGMENTS.md           provenance, citations, license notes
 ├── configs/                     hydra experiment configs (copy into GRID)
@@ -55,14 +55,13 @@ TextImage_SID_reproduction/
 │   ├── text_qwen3_8B/
 │   ├── mmA_clip_text_concat/
 │   └── mmB_qwen3vl_2B/
-├── artifacts/                   intermediate artifacts of the reported runs
-│   │                            (frozen embeddings + Semantic-ID pickles;
-│   │                            see docs/artifacts_reference.md)
-│   ├── MANIFEST.csv             sha256 + size of every tensor below
-│   ├── text_qwen3_0.6B/         embedding/ + semantic_id/
-│   ├── text_qwen3_8B/
-│   ├── mmA_clip_text_concat/
-│   └── mmB_qwen3vl_2B/
+├── artifacts/                   guide to the intermediate tensors of the
+│   │                            reported runs.  In this archive only
+│   │                            README.md + MANIFEST.csv are shipped (the
+│   │                            ~980 MB .pt tensors are distributed as a
+│   │                            GitHub Release archive — see artifacts/README.md)
+│   ├── MANIFEST.csv             sha256 + size of every tensor in the full set
+│   └── README.md                download / verify / usage instructions
 └── docs/
     ├── metrics_reference.md     every CSV column + expected values (thesis tables)
     ├── artifacts_reference.md   every archived tensor: role, shape, provenance
@@ -111,10 +110,12 @@ Notes
 
 **This package does not ship raw dataset files** (MicroLens terms of use
 prohibit secondary redistribution; see `ACKNOWLEDGMENTS.md`).  The derived
-intermediate tensors of the reported runs *are* included under
-[`artifacts/`](artifacts/README.md) — frozen item embeddings and Semantic-ID
-pickles — so the Semantic-ID structure can be inspected and the TIGER stage
-re-run without re-extracting embeddings.
+intermediate tensors of the reported runs (frozen item embeddings and
+Semantic-ID pickles, ≈ 980 MB) are likewise **not bundled in this archive**
+— the Moodle submission is capped at 230 MB and GitHub rejects files above
+100 MB.  They are distributed as a GitHub Release archive
+([`artifacts/README.md`](artifacts/README.md)) and can always be regenerated
+from scratch with the pipeline in this package.
 
 ### 3.1 Amazon Beauty (validation only)
 
@@ -268,14 +269,17 @@ Cached embedding files (`FORCE_EXTRACT=1` to recompute):
 the Qwen3-VL extraction (safe to delete together with the `.pt` to restart).
 
 > The exact frozen tensors and Semantic-ID pickles of the reported runs are
-> archived in this package under `artifacts/` with the same canonical file
-> names (one directory per configuration; see
+> **not committed to this repository** (sizes exceed the GitHub/Moodle
+> limits).  To inspect or reuse them, download the full archive from the
+> GitHub Release linked in [`artifacts/README.md`](artifacts/README.md) and
+> unpack it — you will get one directory per configuration with the canonical
+> file names used in the table above (see
 > [`docs/artifacts_reference.md`](docs/artifacts_reference.md)).  The
 > `semantic_id/semantic_ids.pt` pickles are byte-identical to the files passed
 > as `semantic_id_path` to the TIGER training runs reported in the
-> dissertation.  If you copy them to the `<GRID_ROOT>/data/microLen/` paths in
-> the table above, the extraction stages of the pipeline skip straight to
-> RQ-VAE / TIGER.
+> dissertation.  Copy each `embedding/*.pt` to the `<GRID_ROOT>/data/microLen/`
+> paths in the table above and the extraction stages of the pipeline skip
+> straight to RQ-VAE / TIGER.
 
 ### Partial re-runs and state
 
